@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class CharacterHitEventManager : MonoBehaviour
 {
-    void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnCollisionEnter(Collision hit)
     {
-        if (hit.gameObject.tag == "Sumo")
+        Debug.Log("Collision Hit");
+
+        if (hit.gameObject.tag == "Sumo" || hit.gameObject.tag == "Player")
             GetComponent<Push>().StartEvent(hit);
 
         if (hit.gameObject.tag == "Enhancer")
             GetComponent<CollectEnhancer>().StartEvent(hit);
     }
+
 }

@@ -1,35 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Push : MonoBehaviour
 {
-    private CharacterProperties characterProperties;
-    private CharacterController characterController;
     private bool updateEvent = false;
     private float pushStartTime;
     private float pushDuration = 0.5f;
-    private float enemyPushForce;
+    private GameObject targetSumo;
     private Vector3 pushDirection;
-
-    private void Start()
-    {
-        characterProperties = GetComponent<CharacterProperties>();
-        characterController = GetComponent<CharacterController>();
-    }
-
     private void Update()
     {
         if (updateEvent)
             UpdateEvent();
     }
 
-    public void StartEvent(ControllerColliderHit hit)
+    public void StartEvent(Collision hit)
     {
+        Debug.Log("Pushing...");
         pushStartTime = Timer.Instance.CurrentTime;
         pushDirection = (this.transform.position - hit.transform.position).normalized;
-        enemyPushForce = hit.gameObject.GetComponent<CharacterProperties>().pushForce;
-        characterProperties.isBeingPushed = true;
+        targetSumo = hit.gameObject;
+        GetComponent<CharacterProperties>().isBeingPushed = true;
+        GetComponent<CharacterProperties>().lastHitSumo = hit.gameObject;
         updateEvent = true;
     }
 
@@ -37,13 +28,15 @@ public class Push : MonoBehaviour
     {
         if (pushStartTime + pushDuration < Timer.Instance.CurrentTime)
             ExitEvent();
-        
-        characterController.Move(enemyPushForce * pushDirection * Time.deltaTime);
+
+        // Push target sumo.
+        float pushForce = -GetComponent<CharacterProperties>().pushForce / targetSumo.transform.localScale.x;
+        targetSumo.GetComponent<CharacterController>().Move(pushForce * pushDirection * Time.deltaTime);
     }
 
     private void ExitEvent()
     {
-        characterProperties.isBeingPushed = false;
+        GetComponent<CharacterProperties>().isBeingPushed = false;
         updateEvent = false;
     }
 

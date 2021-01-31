@@ -21,6 +21,8 @@ public class SumosUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sumosText.text = Sumos.Instance.SumosInGame.Count.ToString();
+        sumosText.text = SumoContainer.Instance.sumos.Count.ToString();
+        if (SumoContainer.Instance.sumos.Count == 1)
+            GameRestarter.Instance.Restart(true);
     }
 }

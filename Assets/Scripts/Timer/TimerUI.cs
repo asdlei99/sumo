@@ -21,6 +21,10 @@ public class TimerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timerText.text = Timer.Instance.RemainingDuration.ToString("F0");
+        if(Timer.Instance.RemainingDuration > 0)
+            timerText.text = Timer.Instance.RemainingDuration.ToString("F0");
+        else
+            timerText.text = "0";
+
     }
 }

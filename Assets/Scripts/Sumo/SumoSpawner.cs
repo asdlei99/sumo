@@ -17,8 +17,6 @@ public class SumoSpawner : MonoBehaviour
 
     [SerializeField]
     private GameObject playerPrefab;
-
-    private bool isFirstSpawn = true;
     #endregion
 
     #region Methods
@@ -34,18 +32,25 @@ public class SumoSpawner : MonoBehaviour
 
     private void Start()
     {
-        foreach(Transform location in spawnLocations)
+        InitialSpawn();
+    }
+
+    public void InitialSpawn()
+    {
+        bool isFirstSpawn = true;
+
+        foreach (Transform location in spawnLocations)
         {
-            if(isFirstSpawn)
+            if (isFirstSpawn)
             {
-                Sumos.Instance.SumosInGame.Add(Instantiate(playerPrefab, location.position, location.rotation));
+                SumoContainer.Instance.sumos.Add(Instantiate(playerPrefab, location.position, location.rotation));
                 isFirstSpawn = false;
             }
             else
             {
-                Sumos.Instance.SumosInGame.Add(Instantiate(npcPrefab, location.position, location.rotation));
+                SumoContainer.Instance.sumos.Add(Instantiate(npcPrefab, location.position, location.rotation));
             }
-        }   
+        }
     }
     #endregion
 }

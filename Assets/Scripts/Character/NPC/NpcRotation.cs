@@ -14,8 +14,11 @@ public class NpcRotation : MonoBehaviour
     {
         GameObject target = null;
 
-        foreach (GameObject sumo in Sumos.Instance.SumosInGame)
+        foreach (GameObject sumo in SumoContainer.Instance.sumos)
         {
+            if (sumo == null)
+                continue;
+
             if (sumo.transform == transform)
                 continue;
 
@@ -28,15 +31,20 @@ public class NpcRotation : MonoBehaviour
                 target = sumo;
         }
 
-        foreach(GameObject pickable in Pickables.Instance.pickablesInGame)
+        foreach(GameObject enhancer in EnhancerContainer.Instance.enchancers)
         {
-            float distance = Vector3.Distance(transform.position, pickable.transform.position);
+            if (enhancer == null)
+                continue;
+
+            float distance = Vector3.Distance(transform.position, enhancer.transform.position);
             float currrentTargetDistance = Vector3.Distance(transform.position, target.transform.position);
             if (distance < currrentTargetDistance)
-                target = pickable;
+                target = enhancer;
         }
 
-        return target.transform.position - transform.position;
+        Vector3 targetDirection = target.transform.position - transform.position;
+        targetDirection.y = 0;
+        return targetDirection;
     }
 
     private void SetRotation()
@@ -45,7 +53,7 @@ public class NpcRotation : MonoBehaviour
         Vector3 targetDirection = GetTargetDirection();
 
         // Rotate the forward vector towards the target direction by one step
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime, 0.0f);
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 10 * Time.deltaTime, 0.0f);
 
         // Calculate a rotation a step closer to the target and applies rotation to this object
         transform.rotation = Quaternion.LookRotation(newDirection);

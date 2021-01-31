@@ -6,7 +6,13 @@ namespace Sumo.DeathZone
     {
         private void OnTriggerEnter(Collider other)
         {
-            Sumos.Instance.SumosInGame.Remove(other.gameObject);
+            // If sumo is the player character restart game.
+            if (other.tag == "Player")
+            {
+                GameRestarter.Instance.Restart(false);
+                return;
+            }
+
             Destroy(other.gameObject);
         }
     }

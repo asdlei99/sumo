@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 287697509245490263}
   - component: {fileID: 2518739951055579784}
   - component: {fileID: 577813726148549163}
+  - component: {fileID: 3047176603827473363}
   m_Layer: 0
-  m_Name: Pickable
-  m_TagString: Pickable
+  m_Name: Enhancer
+  m_TagString: Enhancer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,3 +113,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5147251, y: 0.93989205, z: 0.39226216}
   m_Center: {x: 0, y: 0, z: 0.18599597}
+--- !u!114 &3047176603827473363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801131079172109698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02a2beb7a9892f94fb2b3b3601d30059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

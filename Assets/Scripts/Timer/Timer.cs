@@ -17,6 +17,8 @@ public class Timer : MonoBehaviour
 
     // Holds remaing duration (time). 
     public float RemainingDuration { get { return matchDurationInSeconds - currentTime; } }
+
+    private bool isStopped = false;
  
 
     private void Awake()
@@ -31,6 +33,31 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        currentTime += Time.deltaTime;
+        if (!isStopped)
+        {
+            currentTime += Time.deltaTime;
+
+            RestartGameOnTimerUp();
+        }
+    }
+
+    public void Reset()
+    {
+        currentTime = 0f;
+        isStopped = false;
+    }
+    public void RestartGameOnTimerUp()
+    {
+        if (RemainingDuration < 0)
+        {
+            isStopped = true;
+
+            // Check if player won.
+            bool isWin = false;
+            if (SumoContainer.Instance.WinnerSumo().tag == "Player")
+                isWin = true;
+
+            GameRestarter.Instance.Restart(isWin);
+        }
     }
 }
