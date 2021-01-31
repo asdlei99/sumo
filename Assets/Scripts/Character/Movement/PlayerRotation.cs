@@ -42,15 +42,14 @@ namespace Sumo.Character.Controller
             SetPlayer();
 
             // Listen for touch input and rotate player based on that.
-            ListenTouchInput();
+            //ListenTouchInput();
 
             // Listen for mouse input and rotate player based on that.
-            //ListenMouseInput();
+            ListenMouseInput();
         }
 
         /**
          * Listens for touch input and rotates player on touch move. 
-         */
         private void ListenTouchInput()
         {
             if (Input.touchCount > 0)
@@ -64,9 +63,11 @@ namespace Sumo.Character.Controller
                 }
             }
         }
+         */
 
         /**
          * Listens for mouse input and rotates player on touch move. 
+        */
         private void ListenMouseInput()
         {
             if (Input.GetMouseButton(0))
@@ -75,7 +76,6 @@ namespace Sumo.Character.Controller
                 player.transform.Rotate(rotation.eulerAngles);
             }
         }
-        */
 
         /**
          * Set player reference as first item in sumos list in SumoContainer, if it is null. 
