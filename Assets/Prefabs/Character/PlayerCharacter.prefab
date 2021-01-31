@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d822e133fd64143b20ae0c551d73c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRotationSensivity: 10
+  touchSensivity: 10
+  mouseSensivity: 100
 --- !u!1 &8877497590040216079
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,7 +40,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8877497590040216079}
   m_LocalRotation: {x: 0.31427917, y: -0, z: -0, w: 0.9493306}
-  m_LocalPosition: {x: -0.01638186, y: 5.9, z: -3.05}
+  m_LocalPosition: {x: -0.01638186, y: 10.79, z: -6.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9127639121741599844}
@@ -55,7 +56,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -103,6 +104,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1185874777068699000, guid: d87ffcdbeb7fecb4a9516b22d69d5c46,
+        type: 3}
+      propertyPath: speed
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185874777068699000, guid: d87ffcdbeb7fecb4a9516b22d69d5c46,
+        type: 3}
+      propertyPath: maxScale
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185874777068699000, guid: d87ffcdbeb7fecb4a9516b22d69d5c46,
+        type: 3}
+      propertyPath: pushForce
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185874777068699000, guid: d87ffcdbeb7fecb4a9516b22d69d5c46,
+        type: 3}
+      propertyPath: maxPushForce
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2238548281911455117, guid: d87ffcdbeb7fecb4a9516b22d69d5c46,
         type: 3}
       propertyPath: color.a
@@ -122,6 +143,16 @@ PrefabInstance:
         type: 3}
       propertyPath: color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238548281911455117, guid: d87ffcdbeb7fecb4a9516b22d69d5c46,
+        type: 3}
+      propertyPath: pushForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238548281911455117, guid: d87ffcdbeb7fecb4a9516b22d69d5c46,
+        type: 3}
+      propertyPath: maxPushForce
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6122903498671461192, guid: d87ffcdbeb7fecb4a9516b22d69d5c46,
         type: 3}
@@ -187,6 +218,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819983998308988074, guid: d87ffcdbeb7fecb4a9516b22d69d5c46,
+        type: 3}
+      propertyPath: speed
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d87ffcdbeb7fecb4a9516b22d69d5c46, type: 3}

@@ -1,72 +1,75 @@
 using System.Collections;
 using UnityEngine;
 
-public class GameRestarter : MonoBehaviour
+namespace Sumo.GameStateManagement
 {
-    // Singleton pointer
-    public static GameRestarter Instance { get; private set; }
-
-    private void Awake()
+    public class GameRestarter : MonoBehaviour
     {
-        // Set this class as Singleton
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
+        // Singleton pointer
+        public static GameRestarter Instance { get; private set; }
 
-    public void Restart(bool isWin)
-    {
-        StartCoroutine(RestartCoroutine(isWin));
-    }
+        private void Awake()
+        {
+            // Set this class as Singleton
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(gameObject);
+        }
 
-    public IEnumerator RestartCoroutine(bool isWin)
-    {
-        // Hide in game ui
-        InGameUI.Instance.Hide();
+        public void Restart(bool isWin)
+        {
+            StartCoroutine(RestartCoroutine(isWin));
+        }
 
-        // Destroy all enhancers in the scene.
-        DestroyEnhancers();
+        public IEnumerator RestartCoroutine(bool isWin)
+        {
+            // Hide in game ui
+            Sumo.UI.InGameUI.Instance.Hide();
 
-        // Destroy all sumos in the scene.
-        DestroySumos();
+            // Destroy all enhancers in the scene.
+            DestroyEnhancers();
 
-        // Display game over ui
-        GameStarterUI.Instance.DisplayGameOverUI(isWin);
+            // Destroy all sumos in the scene.
+            DestroySumos();
 
-        // Wait for 2 seconds to display ui.
-        yield return new WaitForSeconds(2f);
+            // Display game over ui
+            Sumo.UI.GameStarterUI.Instance.DisplayGameOverUI(isWin);
 
-        // Remove game over ui
-        GameStarterUI.Instance.RemoveGameOverUI();
+            // Wait for 2 seconds to display ui.
+            yield return new WaitForSeconds(2f);
 
-        // Show in game ui
-        InGameUI.Instance.Show();
+            // Remove game over ui
+            Sumo.UI.GameStarterUI.Instance.RemoveGameOverUI();
 
-        // Spawn enhancers back
-        EnhancerSpawner.Instance.InitialSpawn();
+            // Show in game ui
+            Sumo.UI.InGameUI.Instance.Show();
 
-        // Spawn sumos back
-        SumoSpawner.Instance.InitialSpawn();
+            // Spawn enhancers back
+            Sumo.EnhancerManagement.EnhancerSpawner.Instance.InitialSpawn();
 
-        // Reset timer
-        Timer.Instance.Reset();
+            // Spawn sumos back
+            Sumo.SumoManagement.SumoSpawner.Instance.InitialSpawn();
+
+            // Reset timer
+            Sumo.TimeManagement.Timer.Instance.Reset();
         
-    }
+        }
 
-    private void DestroyEnhancers()
-    {
-        // Destroy each enhancer in the list.
-        foreach (GameObject enhancer in EnhancerContainer.Instance.enchancers)
-            Destroy(enhancer);
-    }
+        private void DestroyEnhancers()
+        {
+            // Destroy each enhancer in the list.
+            foreach (GameObject enhancer in Sumo.EnhancerManagement.EnhancerContainer.Instance.enchancers)
+                Destroy(enhancer);
+        }
 
-    private void DestroySumos()
-    {
-        // Destroy each enhancer in the list.
-        foreach (GameObject sumo in SumoContainer.Instance.sumos)
-            Destroy(sumo);
-    }
+        private void DestroySumos()
+        {
+            // Destroy each enhancer in the list.
+            foreach (GameObject sumo in Sumo.SumoManagement.SumoContainer.Instance.sumos)
+                Destroy(sumo);
+        }
 
     
+    }
 }
